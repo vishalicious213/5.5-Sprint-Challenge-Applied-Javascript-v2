@@ -25,4 +25,11 @@ function Header() {
     header.classList.add("header");
     date.classList.add("date");
     temperature.classList.add("temp");
+
+    // set text content
+    date.textContent = "March 28, 2019";
+    times.textContent = "Lambda Times";
+    temperature.textContent = "98°";
+
+    return header;
 }
