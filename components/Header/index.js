@@ -33,3 +33,6 @@ function Header() {
 
     return header;
 }
+
+const placeHeader = document.querySelector(".header-container");
+placeHeader.appendChild(Header());
