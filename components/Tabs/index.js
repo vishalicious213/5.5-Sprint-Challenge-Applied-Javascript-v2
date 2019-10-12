@@ -10,8 +10,10 @@
 
 axios.get("https://lambda-times-backend.herokuapp.com/topics")
     .then(response => {
-        console.log("Got data from Lambda", response);
-        console.log(response.data.topics);
+        // console.log("Got data from Lambda", response);
+        // console.log(response.data.topics);
+        const topicArr = response.data.topics;
+        console.log("Topics array", topicArr);
     })
     .catch(err => {
         console.log("Got error from Lambda", err);
