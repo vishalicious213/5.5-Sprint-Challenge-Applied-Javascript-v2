@@ -20,4 +20,9 @@ function Header() {
     header.appendChild(date);
     header.appendChild(times);
     header.appendChild(temperature);
+
+    // set class names (from HTML)
+    header.classList.add("header");
+    date.classList.add("date");
+    temperature.classList.add("temp");
 }
