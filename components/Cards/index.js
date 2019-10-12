@@ -18,6 +18,8 @@
 //
 // Create a card for each of the articles and add the card to the DOM.
 
+const articleAnchor = document.querySelector(".cards-container");
+
 axios.get("https://lambda-times-backend.herokuapp.com/articles")
     .then(response => {
         // console.log("Got data from Lambda", response);
@@ -60,25 +62,57 @@ axios.get("https://lambda-times-backend.herokuapp.com/articles")
                 // console.log(info[0][categoryCount][articleCount])
                 // console.log(info[categoryCount][1][articleCount]["authorName"])
                 
-                let article = (info[categoryCount][1][articleCount]);
+                let articleData = (info[categoryCount][1][articleCount]);
                 // console.log(article["authorName"]);
                 // console.log(article["authorPhoto"]);
                 // console.log(article["headline"]);
 
-                const authorName = (article["authorName"]);
-                const authorPhoto = (article["authorPhoto"]);
-                const headline = (article["headline"]);
+                const authorName = (articleData["authorName"]);
+                const authorPhoto = (articleData["authorPhoto"]);
+                const headline = (articleData["headline"]);
                 // console.log(authorName);
                 // console.log(authorPhoto);
                 // console.log(headline);
 
+                const article = publisher(authorName, authorPhoto, headline);
+                articleAnchor.appendChild(article);
+
             } // for articleCount
-            
-            
         } // for categoryCount
 
         
-    })
+    }) // .then
     .catch(err => {
         console.log("Got error from Lambda", err);
     })
+
+
+    function publisher(name, photo, title) {
+        // define new elements
+        const card = document.createElement("div"); // container
+        const headline = document.createElement("div"); // text
+        const author = document.createElement("div"); // container
+        const imgContainer = document.createElement("div"); //container
+        const imgSrc = document.createElement("img"); // URL
+        const writer = document.createElement("span"); // text
+    
+        // setup structure of elements
+        card.appendChild(headline);
+        card.appendChild(author);
+            author.appendChild(imgContainer);
+                imgContainer.appendChild(imgSrc);
+            imgContainer.appendChild(writer);
+
+        // set class names (from HTML)
+        card.classList.add("card");
+        headline.classList.add("headline");
+        author.classList.add("author");
+        imgContainer.classList.add("img-container");
+
+        //set text
+        headline.textContent = title;
+        writer.textContent = name;
+        imgSrc.src = photo;
+
+        return card;
+    }
